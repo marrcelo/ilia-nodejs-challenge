@@ -1,8 +1,9 @@
-import { Request, Response } from "express";
+import { Response } from "express";
 import { TransactionModel } from "@src/models/transaction-model";
 import sendError from "@src/util/errors";
+import { RequestWithContext } from "@src/shared/types/resquest-with-context";
 
-export default async (req: Request, res: Response) => {
+const getBalance = async (req: RequestWithContext, res: Response) => {
   try {
     const [result] = await TransactionModel.aggregate([
       {
@@ -18,6 +19,8 @@ export default async (req: Request, res: Response) => {
     if (result) return res.send({ amount: result.amount });
     return res.send({ amount: 0 });
   } catch (error) {
-    sendError(res, error);
+    return sendError(res, error);
   }
 };
+
+export default getBalance;

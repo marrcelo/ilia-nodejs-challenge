@@ -1,8 +1,9 @@
-import { Request, Response } from "express";
+import { Response } from "express";
 import Joi from "joi";
 import HttpStatus from "http-status-codes";
 import { TransactionModel } from "@src/models/transaction-model";
 import sendError from "@src/util/errors";
+import { RequestWithContext } from "@src/shared/types/resquest-with-context";
 
 const ReqQuerySchema = Joi.object({
   limit: Joi.number().integer().min(1).default(20),
@@ -22,7 +23,10 @@ export const validateReqQuerySchema = (data: Partial<IReqQuery>) => {
   });
 };
 
-export const getTransactions = async (req: Request, res: Response) => {
+export const getTransactions = async (
+  req: RequestWithContext,
+  res: Response
+) => {
   try {
     const { query } = req;
 
@@ -36,6 +40,6 @@ export const getTransactions = async (req: Request, res: Response) => {
 
     return res.send(transactions);
   } catch (error) {
-    sendError(res, error);
+    return sendError(res, error);
   }
 };

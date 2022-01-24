@@ -1,7 +1,7 @@
 import { ValidationError } from "joi";
 import { validateCreateTransactionBody } from "./create-transaction";
 
-describe("Transactions unit tests", () => {
+describe("Create transactions unit tests", () => {
   describe("When creating a new transaction", () => {
     it("should return a error when body has invalid data", async () => {
       const invalidBody = {

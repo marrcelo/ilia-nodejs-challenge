@@ -1,7 +1,7 @@
 import { ValidationError } from "joi";
 import { validateReqQuerySchema } from "./get-transactions";
 
-describe("Transactions unit tests", () => {
+describe("Get transactions unit tests", () => {
   describe("When getting transactions", () => {
     it("should return a error when body has invalid data", async () => {
       const invalidQuery = {

@@ -1,4 +1,4 @@
-import "dotenv/config";
+import "dotenv-safe/config";
 import "./util/module-alias";
 import express from "express";
 import logger from "@src/logger";
@@ -7,6 +7,7 @@ import bodyParser from "body-parser";
 import { createTransaction } from "./use-cases/create-transaction/create-transaction";
 import { getTransactions } from "./use-cases/get-transactions/get-transactions";
 import getBalance from "./use-cases/get-balance/get.balance";
+import authMiddleware from "./middlewares/auth";
 
 export const app = express();
 
@@ -17,9 +18,9 @@ app.get("/", (req, res) =>
   res.send(`Server running at http://localhost:${process.env.PORT}`)
 );
 
-app.post("/transactions", createTransaction);
-app.get("/transactions", getTransactions);
-app.get("/balance", getBalance);
+app.post("/transactions", authMiddleware, createTransaction);
+app.get("/transactions", authMiddleware, getTransactions);
+app.get("/balance", authMiddleware, getBalance);
 
 export const server = app.listen(process.env.PORT, () => {
   logger.info(`Server running at http://localhost:${process.env.PORT}`);

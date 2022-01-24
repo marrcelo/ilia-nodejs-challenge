@@ -1,4 +1,4 @@
-const dotenv = require("dotenv");
+const dotenv = require("dotenv-safe");
 const path = require("path");
 
 dotenv.config({ path: `${__dirname}/../.env.test` });
