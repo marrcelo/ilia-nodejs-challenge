@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import Joi from "joi";
 import HttpStatus from "http-status-codes";
 import { TransactionModel } from "@src/models/transaction-model";
+import sendError from "@src/util/errors";
 
 const ReqQuerySchema = Joi.object({
   limit: Joi.number().integer().min(1).default(20),
@@ -22,15 +23,19 @@ export const validateReqQuerySchema = (data: Partial<IReqQuery>) => {
 };
 
 export const getTransactions = async (req: Request, res: Response) => {
-  const { query } = req;
+  try {
+    const { query } = req;
 
-  const { value, error } = validateReqQuerySchema(query);
-  if (error)
-    return res
-      .status(HttpStatus.BAD_REQUEST)
-      .send({ message: "Validation Error: Invalid query request.", error });
+    const { value, error } = validateReqQuerySchema(query);
+    if (error)
+      return res
+        .status(HttpStatus.BAD_REQUEST)
+        .send({ message: "Validation Error: Invalid query request.", error });
 
-  const transactions = await TransactionModel.paginate(value);
+    const transactions = await TransactionModel.paginate(value);
 
-  return res.send(transactions);
+    return res.send(transactions);
+  } catch (error) {
+    sendError(res, error);
+  }
 };

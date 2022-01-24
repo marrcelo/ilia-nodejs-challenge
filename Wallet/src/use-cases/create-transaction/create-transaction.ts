@@ -3,6 +3,7 @@ import Joi from "joi";
 import { isValidObjectId } from "mongoose";
 import HttpStatus from "http-status-codes";
 import { ITransaction, TransactionModel } from "@src/models/transaction-model";
+import sendError from "@src/util/errors";
 
 const TransactionBodySchema = Joi.object({
   user_id: Joi.string()
@@ -24,16 +25,20 @@ export const validateCreateTransactionBody = (
 };
 
 export const createTransaction = async (req: Request, res: Response) => {
-  const data = req.body;
-  const { error, value } = validateCreateTransactionBody(data);
+  try {
+    const data = req.body;
+    const { error, value } = validateCreateTransactionBody(data);
 
-  if (error)
-    return res
-      .status(HttpStatus.BAD_REQUEST)
-      .send({ message: "Validation Error: Invalid request.", error });
+    if (error)
+      return res
+        .status(HttpStatus.BAD_REQUEST)
+        .send({ message: "Validation Error: Invalid request.", error });
 
-  const transaction = new TransactionModel(value);
-  const newTransaction = await transaction.save();
+    const transaction = new TransactionModel(value);
+    const newTransaction = await transaction.save();
 
-  return res.status(HttpStatus.CREATED).send(newTransaction);
+    return res.status(HttpStatus.CREATED).send(newTransaction);
+  } catch (error) {
+    sendError(res, error);
+  }
 };
