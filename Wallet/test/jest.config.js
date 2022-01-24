@@ -1,4 +1,7 @@
+const dotenv = require("dotenv");
 const path = require("path");
+
+dotenv.config({ path: `${__dirname}/../.env.test` });
 
 const { resolve } = path;
 

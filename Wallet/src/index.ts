@@ -3,8 +3,10 @@ import "./util/module-alias";
 import express from "express";
 import logger from "@src/logger";
 import * as database from "@src/database";
-import { createTransaction } from "./use-cases/create-transaction/create-transaction";
 import bodyParser from "body-parser";
+import { createTransaction } from "./use-cases/create-transaction/create-transaction";
+import { getTransactions } from "./use-cases/get-transactions/get-transactions";
+import getBalance from "./use-cases/get-balance/get.balance";
 
 export const app = express();
 
@@ -16,6 +18,8 @@ app.get("/", (req, res) =>
 );
 
 app.post("/transactions", createTransaction);
+app.get("/transactions", getTransactions);
+app.get("/balance", getBalance);
 
 export const server = app.listen(process.env.PORT, () => {
   logger.info(`Server running at http://localhost:${process.env.PORT}`);

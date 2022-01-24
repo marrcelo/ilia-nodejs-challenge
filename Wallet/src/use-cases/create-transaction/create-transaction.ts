@@ -2,7 +2,26 @@ import { Request, Response } from "express";
 import Joi from "joi";
 import { isValidObjectId } from "mongoose";
 import HttpStatus from "http-status-codes";
-import { TransactionModel } from "@src/models/transaction-model";
+import { ITransaction, TransactionModel } from "@src/models/transaction-model";
+
+const TransactionBodySchema = Joi.object({
+  user_id: Joi.string()
+    .custom((value, helpers) => {
+      if (!isValidObjectId(value)) return helpers.error("any.invalid");
+      return value;
+    })
+    .required(),
+  amount: Joi.number().integer().min(0).required(),
+  type: Joi.string().valid("CREDIT", "DEBIT").required(),
+});
+
+export const validateCreateTransactionBody = (
+  data: Omit<ITransaction, "id">
+) => {
+  return TransactionBodySchema.validate(data, {
+    abortEarly: false,
+  });
+};
 
 export const createTransaction = async (req: Request, res: Response) => {
   const data = req.body;
@@ -16,22 +35,5 @@ export const createTransaction = async (req: Request, res: Response) => {
   const transaction = new TransactionModel(value);
   const newTransaction = await transaction.save();
 
-  return res.send(newTransaction);
+  return res.status(HttpStatus.CREATED).send(newTransaction);
 };
-
-export const validateCreateTransactionBody = (data: any) => {
-  return TransactionBodySchema.validate(data, {
-    abortEarly: false,
-  });
-};
-
-const TransactionBodySchema = Joi.object({
-  user_id: Joi.string()
-    .custom((value, helpers) => {
-      if (!isValidObjectId(value)) return helpers.error("any.invalid");
-      return true;
-    })
-    .required(),
-  amount: Joi.number().integer().min(0).required(),
-  type: Joi.string().valid("CREDIT", "DEBIT").required(),
-});

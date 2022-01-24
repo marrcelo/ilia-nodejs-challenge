@@ -1,15 +1,11 @@
-import { Document, Schema, model } from "mongoose";
+import { Schema, model, Document } from "mongoose";
+import { mongoosePagination, Pagination } from "mongoose-paginate-ts";
 
-export enum TransactionTypesEnum {
-  DEBIT,
-  CREDIT,
-}
-
-export interface ITransaction extends Document {
+export interface ITransaction {
   id: string;
   user_id: string;
   amount: number;
-  type: TransactionTypesEnum;
+  type: string;
 }
 
 const TransactionSchema = new Schema(
@@ -31,7 +27,9 @@ const TransactionSchema = new Schema(
   }
 );
 
-export const TransactionModel = model<ITransaction>(
-  "Campaign",
-  TransactionSchema
-);
+TransactionSchema.plugin(mongoosePagination);
+
+export const TransactionModel = model<
+  ITransaction,
+  Pagination<ITransaction & Document>
+>("Transaction", TransactionSchema);
