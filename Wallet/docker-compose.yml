@@ -1,0 +1,25 @@
+version: "3"
+
+services:
+  database:
+    image: mongo
+    restart: always
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_DATABASE: ${MONGO_INITDB_DATABASE}
+      # MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
+      # MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
+
+  app:
+    build: .
+    command: npm run dev 
+    ports:
+      - 3001:3001
+    volumes:
+      - .:/usr/app
+    restart: always
+    depends_on:
+      - database
+    environment:
+      NODE_ENV: ${NODE_ENV}
