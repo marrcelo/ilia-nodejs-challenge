@@ -9,8 +9,9 @@
     "dev": "ts-node-dev --transpile-only src/index.ts | pino-pretty -c",
     "lint": "eslint ./src ./test --ext .ts",
     "lint:fix": "eslint ./src ./test --ext .ts --fix",
-    "test:functional": "jest --projects ./test --runInBand",
-    "test:unit": "jest"
+    "test:functional": "jest --projects ./test --runInBand --verbose",
+    "test:unit": "jest -t    ",
+    "test": "npm run lint && npm run style:check && npm run test:unit && npm run test:functional"
   },
   "repository": {
     "type": "git",
@@ -24,8 +25,10 @@
   },
   "homepage": "https://github.com/marrcelo/ilia-nodejs-challenge#readme",
   "dependencies": {
+    "body-parser": "^1.19.1",
     "dotenv": "^14.2.0",
     "express": "^4.17.2",
+    "joi": "^17.5.0",
     "module-alias": "^2.2.2",
     "mongoose": "^6.1.7",
     "pino": "^7.6.4"

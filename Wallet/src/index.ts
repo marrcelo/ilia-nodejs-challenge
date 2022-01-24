@@ -3,12 +3,19 @@ import "./util/module-alias";
 import express from "express";
 import logger from "@src/logger";
 import * as database from "@src/database";
+import { createTransaction } from "./use-cases/create-transaction/create-transaction";
+import bodyParser from "body-parser";
 
 export const app = express();
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 app.get("/", (req, res) =>
   res.send(`Server running at http://localhost:${process.env.PORT}`)
 );
+
+app.post("/transactions", createTransaction);
 
 export const server = app.listen(process.env.PORT, () => {
   logger.info(`Server running at http://localhost:${process.env.PORT}`);
