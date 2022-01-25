@@ -1,0 +1,12 @@
+{
+  "user": {
+    "_id": "61f00edd78ee8e4d31e9b7b0",
+    "first_name": "maria",
+    "last_name": "silva",
+    "email": "maria.silva@test.com",
+    "createdAt": "2022-01-25T14:53:17.118Z",
+    "updatedAt": "2022-01-25T14:53:17.118Z",
+    "__v": 0
+  },
+  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MWYwMGVkZDc4ZWU4ZTRkMzFlOWI3YjAiLCJpYXQiOjE2NDMxMjMzNDR9.5QoBmn8fwHMpl5Kdcu6xRxfpU0fEV-NXEFTjAEgi_8A"
+}

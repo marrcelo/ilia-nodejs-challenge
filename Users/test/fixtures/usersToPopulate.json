@@ -1,0 +1,42 @@
+[
+  {
+    "first_name": "maria",
+    "last_name": "silva",
+    "email": "maria.silva@test.com",
+    "password": "$2a$08$Y.zikN6wRZz8EnGZlNg6n.Ke3TtzKivWmbHg/KcafD7uE8rv2ZWja",
+    "_id": "61f00edd78ee8e4d31e9b7b0",
+    "createdAt": "2022-01-25T14:53:17.118Z",
+    "updatedAt": "2022-01-25T14:53:17.118Z",
+    "__v": 0
+  },
+  {
+    "first_name": "joana",
+    "last_name": "costa",
+    "email": "joana.costa@test.com",
+    "password": "$2a$08$Y.zikN6wRZz8EnGZlNg6n.Ke3TtzKivWmbHg/KcafD7uE8rv2ZWja",
+    "_id": "61f00eeb78ee8e4d31e9b7b3",
+    "createdAt": "2022-01-25T14:53:31.266Z",
+    "updatedAt": "2022-01-25T14:53:31.266Z",
+    "__v": 0
+  },
+  {
+    "first_name": "marcelo",
+    "last_name": "ferreira",
+    "email": "marcelo.ferreira@test.com",
+    "password": "$2a$08$Y.zikN6wRZz8EnGZlNg6n.Ke3TtzKivWmbHg/KcafD7uE8rv2ZWja",
+    "_id": "61f00efc78ee8e4d31e9b7b6",
+    "createdAt": "2022-01-25T14:53:48.751Z",
+    "updatedAt": "2022-01-25T14:53:48.751Z",
+    "__v": 0
+  },
+  {
+    "first_name": "mateus",
+    "last_name": "amaral",
+    "email": "mateus.amaral@test.com",
+    "password": "$2a$08$Y.zikN6wRZz8EnGZlNg6n.Ke3TtzKivWmbHg/KcafD7uE8rv2ZWja",
+    "_id": "61f00f1e78ee8e4d31e9b7be",
+    "createdAt": "2022-01-25T14:54:22.378Z",
+    "updatedAt": "2022-01-25T14:54:22.378Z",
+    "__v": 0
+  }
+]

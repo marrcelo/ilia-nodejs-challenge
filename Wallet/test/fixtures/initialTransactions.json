@@ -1,0 +1,92 @@
+[
+  {
+    "_id": "61ee9f22a80fe98307722cbe",
+    "user_id": "4baa56f1230048567300485c",
+    "amount": 10,
+    "type": "CREDIT",
+    "createdAt": "2022-01-24T12:44:18.813Z",
+    "updatedAt": "2022-01-24T12:44:18.813Z",
+    "__v": 0
+  },
+  {
+    "_id": "61ee9f22a80fe98307722cc0",
+    "user_id": "4baa56f1230048567300485c",
+    "amount": 10,
+    "type": "DEBIT",
+    "createdAt": "2022-01-24T12:44:18.962Z",
+    "updatedAt": "2022-01-24T12:44:18.962Z",
+    "__v": 0
+  },
+  {
+    "_id": "61ee9f23a80fe98307722cc2",
+    "user_id": "4baa56f1230048567300485c",
+    "amount": 10,
+    "type": "CREDIT",
+    "createdAt": "2022-01-24T12:44:19.143Z",
+    "updatedAt": "2022-01-24T12:44:19.143Z",
+    "__v": 0
+  },
+  {
+    "_id": "61ee9f23a80fe98307722cc4",
+    "user_id": "4baa56f1230048567300485c",
+    "amount": 10,
+    "type": "DEBIT",
+    "createdAt": "2022-01-24T12:44:19.295Z",
+    "updatedAt": "2022-01-24T12:44:19.295Z",
+    "__v": 0
+  },
+  {
+    "_id": "61ee9f23a80fe98307722cc6",
+    "user_id": "4baa56f1230048567300485c",
+    "amount": 10,
+    "type": "CREDIT",
+    "createdAt": "2022-01-24T12:44:19.459Z",
+    "updatedAt": "2022-01-24T12:44:19.459Z",
+    "__v": 0
+  },
+  {
+    "_id": "61ee9f24a80fe98307722cc8",
+    "user_id": "507f1f77bcf86cd799439011",
+    "amount": 10,
+    "type": "DEBIT",
+    "createdAt": "2022-01-24T12:44:20.889Z",
+    "updatedAt": "2022-01-24T12:44:20.889Z",
+    "__v": 0
+  },
+  {
+    "_id": "61ee9f25a80fe98307722cca",
+    "user_id": "507f1f77bcf86cd799439011",
+    "amount": 10,
+    "type": "CREDIT",
+    "createdAt": "2022-01-24T12:44:21.061Z",
+    "updatedAt": "2022-01-24T12:44:21.061Z",
+    "__v": 0
+  },
+  {
+    "_id": "61ee9f25a80fe98307722ccc",
+    "user_id": "507f1f77bcf86cd799439011",
+    "amount": 10,
+    "type": "CREDIT",
+    "createdAt": "2022-01-24T12:44:21.233Z",
+    "updatedAt": "2022-01-24T12:44:21.233Z",
+    "__v": 0
+  },
+  {
+    "_id": "61ee9f25a80fe98307722cce",
+    "user_id": "507f1f77bcf86cd799439011",
+    "amount": 10,
+    "type": "CREDIT",
+    "createdAt": "2022-01-24T12:44:21.399Z",
+    "updatedAt": "2022-01-24T12:44:21.399Z",
+    "__v": 0
+  },
+  {
+    "_id": "61ee9f25a80fe98307722cd0",
+    "user_id": "507f1f77bcf86cd799439011",
+    "amount": 10,
+    "type": "CREDIT",
+    "createdAt": "2022-01-24T12:44:21.554Z",
+    "updatedAt": "2022-01-24T12:44:21.554Z",
+    "__v": 0
+  }
+]
