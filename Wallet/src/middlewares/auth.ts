@@ -3,9 +3,7 @@ import { Response, NextFunction } from "express";
 import sendError from "@src/util/errors";
 import HttpStatus from "http-status-codes";
 import { isValidObjectId } from "mongoose";
-import logger from "@src/logger";
 import { RequestWithContext } from "@src/shared/types/resquest-with-context";
-import { JsonWebTokenError } from "jsonwebtoken";
 
 const authMiddleware = async (
   req: RequestWithContext,
@@ -30,15 +28,6 @@ const authMiddleware = async (
     req.context = { user_id: sub };
     return next();
   } catch (error) {
-    logger.error(error);
-    if (error instanceof JsonWebTokenError) {
-      let { message } = error;
-      if (error.message === "jwt malformed")
-        message = "Authorization token malformed.";
-
-      return res.status(HttpStatus.UNAUTHORIZED).send({ message });
-    }
-
     return sendError(res, error);
   }
 };

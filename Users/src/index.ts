@@ -8,6 +8,11 @@ import swaggerUi from "swagger-ui-express";
 import swaggerDocument from "./api-docs.json";
 import authMiddleware from "./middlewares/auth";
 import { createUser } from "./use-cases/create-user/create-user";
+import { getUsers } from "./use-cases/get-users/get-users";
+import { updateUser } from "./use-cases/update-user/update-user";
+import { deleteUser } from "./use-cases/delete-user/delete-user";
+import { authUser } from "./use-cases/auth-user/auth-user";
+import { getUserById } from "./use-cases/get-user-by-id/get-user-by-id";
 
 export const app = express();
 
@@ -17,13 +22,22 @@ app.use(bodyParser.json());
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.get("/", (req, res) =>
-  res.send(`Server running at http://localhost:${process.env.PORT}`)
+  res.send({
+    message: `Server running at http://localhost:${process.env.PORT}`,
+  })
 );
 
 app.post("/users", createUser);
+app.get("/users", authMiddleware, getUsers);
+app.get("/users/:id", authMiddleware, getUserById);
+app.patch("/users/:id", authMiddleware, updateUser);
+app.delete("/users/:id", authMiddleware, deleteUser);
+app.post("/auth", authUser);
 
 export const server = app.listen(process.env.PORT, () => {
-  logger.info(`Server running at http://localhost:${process.env.PORT}`);
+  logger.info(
+    `Server running at http://localhost:${process.env.PORT}  on ${process.env.NODE_ENV}`
+  );
 });
 
 database.connect();

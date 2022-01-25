@@ -19,7 +19,9 @@ app.use(bodyParser.json());
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.get("/", (req, res) =>
-  res.send(`Server running at http://localhost:${process.env.PORT}`)
+  res.send({
+    message: `Server running at http://localhost:${process.env.PORT}`,
+  })
 );
 
 app.post("/transactions", authMiddleware, createTransaction);
@@ -27,7 +29,9 @@ app.get("/transactions", authMiddleware, getTransactions);
 app.get("/balance", authMiddleware, getBalance);
 
 export const server = app.listen(process.env.PORT, () => {
-  logger.info(`Server running at http://localhost:${process.env.PORT}`);
+  logger.info(
+    `Server running at http://localhost:${process.env.PORT}  on ${process.env.NODE_ENV}`
+  );
 });
 
 database.connect();

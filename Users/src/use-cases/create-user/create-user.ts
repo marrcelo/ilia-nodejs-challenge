@@ -1,4 +1,4 @@
-import { Response } from "express";
+import { Request, Response } from "express";
 import Joi from "joi";
 import HttpStatus from "http-status-codes";
 import { IUser, UserModel } from "@src/models/user-model";
@@ -19,7 +19,7 @@ export const validateCreateUserBody = (data: Partial<Omit<IUser, "id">>) => {
   });
 };
 
-export const createUser = async (req: RequestWithContext, res: Response) => {
+export const createUser = async (req: Request, res: Response) => {
   try {
     const data = req.body;
     const { error, value } = validateCreateUserBody(data);
@@ -29,10 +29,11 @@ export const createUser = async (req: RequestWithContext, res: Response) => {
         .status(HttpStatus.BAD_REQUEST)
         .send({ message: "Validation Error: Invalid request.", error });
 
-    const transaction = new UserModel(value);
-    const newUser = await transaction.save();
+    const user = new UserModel(value);
+    const newUser = await user.save({});
+    const { password, ...userWithouPassword } = newUser.toObject();
 
-    return res.status(HttpStatus.CREATED).send(newUser);
+    return res.status(HttpStatus.CREATED).send(userWithouPassword);
   } catch (error) {
     return sendError(res, error);
   }
