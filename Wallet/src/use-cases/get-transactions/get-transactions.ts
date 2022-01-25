@@ -4,7 +4,6 @@ import HttpStatus from "http-status-codes";
 import { TransactionModel } from "@src/models/transaction-model";
 import sendError from "@src/util/errors";
 import { RequestWithContext } from "@src/shared/types/resquest-with-context";
-import logger from "@src/logger";
 
 const ReqQuerySchema = Joi.object({
   limit: Joi.number().integer().min(1).default(20),

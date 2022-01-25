@@ -4,7 +4,7 @@ describe("App", () => {
   it("Should get HttpStatus.OK", async () => {
     const response = await global.testRequest.get("/");
     expect(response.status).toBe(HttpStatus.OK);
-    expect(response.text).toMatch("Server running at http://localhost:3003");
+    expect(response.text).toMatch("Server running at http://localhost:3004");
   });
   it("Should get HttpStatus.NOT_FOUND on invalid url", async () => {
     const endpoint = "/invalid";
