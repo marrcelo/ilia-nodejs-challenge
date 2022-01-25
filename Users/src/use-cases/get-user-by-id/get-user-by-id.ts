@@ -1,21 +1,24 @@
-import { Response } from "express";
-import Joi from "joi";
-import HttpStatus from "http-status-codes";
-import { IUser, UserModel } from "@src/models/user-model";
+import { UserModel } from "@src/models/user-model";
 import sendError from "@src/util/errors";
-import { RequestWithContext } from "@src/shared/types/resquest-with-context";
-import logger from "@src/logger";
+import { Request, Response } from "express";
+import HttpStatus from "http-status-codes";
 import { isValidObjectId } from "mongoose";
 
-export const getUserById = async (req: RequestWithContext, res: Response) => {
+const getUserById = async (req: Request, res: Response) => {
   try {
     const { params } = req;
     const { id } = params;
+    const { user_id } = res.locals;
 
     if (!isValidObjectId(id))
       return res
         .status(HttpStatus.BAD_REQUEST)
         .send({ message: "Invalid id." });
+
+    if (id !== user_id)
+      return res
+        .status(HttpStatus.FORBIDDEN)
+        .send({ message: "You can only have access to your User." });
 
     const user = await UserModel.findOne({ _id: id }).select("-password");
 
@@ -24,3 +27,4 @@ export const getUserById = async (req: RequestWithContext, res: Response) => {
     return sendError(res, error);
   }
 };
+export default getUserById;

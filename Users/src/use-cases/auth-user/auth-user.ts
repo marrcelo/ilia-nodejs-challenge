@@ -1,10 +1,8 @@
 import { Request, Response } from "express";
 import Joi from "joi";
 import HttpStatus from "http-status-codes";
-import { IUser, UserModel } from "@src/models/user-model";
+import { UserModel } from "@src/models/user-model";
 import sendError from "@src/util/errors";
-import { RequestWithContext } from "@src/shared/types/resquest-with-context";
-import logger from "@src/logger";
 import { generateToken } from "@src/services/auth";
 
 const AuthUserBodySchema = Joi.object({
@@ -53,6 +51,7 @@ export const authUser = async (req: Request, res: Response) => {
         message: "Could not find a User with this email and password.",
       });
 
+    // eslint-disable-next-line no-underscore-dangle
     const access_token = generateToken(userWithEmail._id.toString());
 
     const { password, ...userWithouPassword } = userWithEmail.toObject();

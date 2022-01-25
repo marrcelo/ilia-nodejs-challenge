@@ -3,8 +3,6 @@ import Joi from "joi";
 import HttpStatus from "http-status-codes";
 import { IUser, UserModel } from "@src/models/user-model";
 import sendError from "@src/util/errors";
-import { RequestWithContext } from "@src/shared/types/resquest-with-context";
-import logger from "@src/logger";
 import { isValidObjectId } from "mongoose";
 
 const UserBodySchema = Joi.object({

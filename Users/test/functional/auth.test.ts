@@ -1,8 +1,6 @@
 import { UserModel } from "@src/models/user-model";
-import { isValidObjectId } from "mongoose";
 import HttpStatus from "http-status-codes";
 import usersToPopulate from "@test/fixtures/usersToPopulate.json";
-import userWithAcessToken from "@test/fixtures/userWithAcessToken.json";
 
 describe("Auth functional tests", () => {
   beforeAll(async () => {

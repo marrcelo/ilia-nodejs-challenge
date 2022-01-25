@@ -1,17 +1,20 @@
-import { Response } from "express";
-import Joi from "joi";
-import HttpStatus from "http-status-codes";
-import { IUser, UserModel } from "@src/models/user-model";
+import { UserModel } from "@src/models/user-model";
 import sendError from "@src/util/errors";
-import { RequestWithContext } from "@src/shared/types/resquest-with-context";
-import logger from "@src/logger";
+import { Request, Response } from "express";
+import HttpStatus from "http-status-codes";
 
-export const getUsers = async (req: RequestWithContext, res: Response) => {
+const getUsers = async (req: Request, res: Response) => {
   try {
-    const users = await UserModel.find({}).select("-password");
+    const { user_id } = res.locals;
+    const query: { _id?: string } = {};
+
+    // eslint-disable-next-line no-underscore-dangle
+    if (user_id) query._id = user_id;
+    const users = await UserModel.find(query).select("-password");
 
     return res.status(HttpStatus.OK).send(users);
   } catch (error) {
     return sendError(res, error);
   }
 };
+export default getUsers;

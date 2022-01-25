@@ -1,6 +1,5 @@
 import { Schema, model, Document, models } from "mongoose";
 import bcrypt from "bcryptjs";
-import logger from "@src/logger";
 
 export interface IUser {
   id: string;

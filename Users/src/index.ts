@@ -8,11 +8,11 @@ import swaggerUi from "swagger-ui-express";
 import swaggerDocument from "./api-docs.json";
 import authMiddleware from "./middlewares/auth";
 import { createUser } from "./use-cases/create-user/create-user";
-import { getUsers } from "./use-cases/get-users/get-users";
+import getUsers from "./use-cases/get-users/get-users";
 import { updateUser } from "./use-cases/update-user/update-user";
-import { deleteUser } from "./use-cases/delete-user/delete-user";
+import deleteUser from "./use-cases/delete-user/delete-user";
 import { authUser } from "./use-cases/auth-user/auth-user";
-import { getUserById } from "./use-cases/get-user-by-id/get-user-by-id";
+import getUserById from "./use-cases/get-user-by-id/get-user-by-id";
 
 export const app = express();
 

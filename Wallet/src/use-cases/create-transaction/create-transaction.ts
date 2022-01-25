@@ -1,10 +1,9 @@
-import { Response } from "express";
+import { Request, Response } from "express";
 import Joi from "joi";
 import { isValidObjectId } from "mongoose";
 import HttpStatus from "http-status-codes";
 import { ITransaction, TransactionModel } from "@src/models/transaction-model";
 import sendError from "@src/util/errors";
-import { RequestWithContext } from "@src/shared/types/resquest-with-context";
 
 const TransactionBodySchema = Joi.object({
   user_id: Joi.string()
@@ -25,10 +24,7 @@ export const validateCreateTransactionBody = (
   });
 };
 
-export const createTransaction = async (
-  req: RequestWithContext,
-  res: Response
-) => {
+export const createTransaction = async (req: Request, res: Response) => {
   try {
     const data = req.body;
     const { error, value } = validateCreateTransactionBody(data);

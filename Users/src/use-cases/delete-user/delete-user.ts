@@ -1,21 +1,23 @@
 import { Request, Response } from "express";
-import Joi from "joi";
 import HttpStatus from "http-status-codes";
-import { IUser, UserModel } from "@src/models/user-model";
+import { UserModel } from "@src/models/user-model";
 import sendError from "@src/util/errors";
-import { RequestWithContext } from "@src/shared/types/resquest-with-context";
-import logger from "@src/logger";
 import { isValidObjectId } from "mongoose";
 
-export const deleteUser = async (req: Request, res: Response) => {
+const deleteUser = async (req: Request, res: Response) => {
   try {
-    const { params } = req;
-    const { id } = params;
+    const { id } = req.params;
+    const { user_id } = res.locals;
 
     if (!isValidObjectId(id))
       return res
         .status(HttpStatus.BAD_REQUEST)
         .send({ message: "Invalid id." });
+
+    if (id !== user_id)
+      return res
+        .status(HttpStatus.FORBIDDEN)
+        .send({ message: "You can only dele your User." });
 
     const result = await UserModel.deleteOne({ _id: id });
 
@@ -31,3 +33,5 @@ export const deleteUser = async (req: Request, res: Response) => {
     return sendError(res, error);
   }
 };
+
+export default deleteUser;
