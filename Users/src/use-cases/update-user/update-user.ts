@@ -21,8 +21,8 @@ export const validateCreateUserBody = (data: Partial<Omit<IUser, "id">>) => {
 export const updateUser = async (req: Request, res: Response) => {
   try {
     const data = req.body;
-    const { params } = req;
-    const { id } = params;
+    const { id } = req.params;
+    const { user_id } = res.locals;
 
     if (!isValidObjectId(id))
       return res
@@ -30,6 +30,11 @@ export const updateUser = async (req: Request, res: Response) => {
         .send({ message: "Invalid id." });
 
     const { error, value } = validateCreateUserBody(data);
+
+    if (id !== user_id)
+      return res
+        .status(HttpStatus.FORBIDDEN)
+        .send({ message: "You can only update your own User." });
 
     if (error)
       return res

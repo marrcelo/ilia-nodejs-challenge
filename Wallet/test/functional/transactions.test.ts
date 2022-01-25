@@ -88,7 +88,7 @@ describe("Transactions functional tests", () => {
         .set({ authorization });
 
       expect(status).toBe(HttpStatus.OK);
-      expect(body.totalDocs).toBe(11);
+      expect(body.totalDocs).toBe(5);
       expect(Object.keys(body)).toEqual([
         "limit",
         "hasPrevPage",

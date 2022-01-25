@@ -4,7 +4,14 @@ import sendError from "@src/util/errors";
 
 const getBalance = async (req: Request, res: Response) => {
   try {
+    const { user_id } = res.locals;
+
     const [result] = await TransactionModel.aggregate([
+      {
+        $match: {
+          user_id: user_id,
+        },
+      },
       {
         $group: {
           _id: null,

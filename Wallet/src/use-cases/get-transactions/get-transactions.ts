@@ -27,6 +27,7 @@ export const validateReqQuerySchema = (data: Partial<IReqQuery>) => {
 export const getTransactions = async (req: Request, res: Response) => {
   try {
     const { query } = req;
+    const { user_id } = res.locals;
 
     const { value, error } = validateReqQuerySchema(query);
     if (error)
@@ -34,14 +35,14 @@ export const getTransactions = async (req: Request, res: Response) => {
         .status(HttpStatus.BAD_REQUEST)
         .send({ message: "Validation Error: Invalid query request.", error });
 
-    const options: Partial<{
-      query: { type: string };
-      sort: { createdAt: number };
-      limit: string;
-      page: number;
-    }> = {};
+    const options: {
+      query: { type?: string; user_id: string };
+      sort?: { createdAt: number };
+      limit?: string;
+      page?: number;
+    } = { query: { user_id } };
 
-    if (value.type) options.query = { type: value.type };
+    if (value.type) options.query.type = value.type;
     if (value.limit) options.limit = value.limit;
     if (value.page) options.page = value.page;
     if (value.sort) {

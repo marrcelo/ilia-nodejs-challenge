@@ -18,7 +18,7 @@ const getUserById = async (req: Request, res: Response) => {
     if (id !== user_id)
       return res
         .status(HttpStatus.FORBIDDEN)
-        .send({ message: "You can only have access to your User." });
+        .send({ message: "You can only have access to your own User." });
 
     const user = await UserModel.findOne({ _id: id }).select("-password");
 

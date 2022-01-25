@@ -17,7 +17,7 @@ const deleteUser = async (req: Request, res: Response) => {
     if (id !== user_id)
       return res
         .status(HttpStatus.FORBIDDEN)
-        .send({ message: "You can only dele your User." });
+        .send({ message: "You can only delete your own User." });
 
     const result = await UserModel.deleteOne({ _id: id });
 

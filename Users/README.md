@@ -67,4 +67,4 @@ para iniciar a aplicação.
 
 É possivel acessar e testar a documentação em:
 
-[http://localhost:3001/api-docs](http://localhost:3001/api-docs)
+[http://localhost:3002/api-docs](http://localhost:3002/api-docs)

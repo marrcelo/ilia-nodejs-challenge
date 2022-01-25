@@ -29,7 +29,7 @@ describe("Transactions functional tests", () => {
       .set({ authorization });
 
     expect(status).toBe(HttpStatus.OK);
-    expect(body.amount).toBe(100);
+    expect(body.amount).toBe(50);
   });
 
   it("Should return a unauthorized error when missing authorization", async () => {
