@@ -31,7 +31,7 @@ for start the application.
 
 You can access and test the documentation at:
 
-[http://localhost:3001/api-docs](http://localhost:3001/api-docs)
+[http://localhost:3002/api-docs](http://localhost:3002/api-docs)
 
 ---
 
