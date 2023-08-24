@@ -39,7 +39,7 @@ You can access and test the documentation at:
 
 ### Antes de começar ⚠️
 
-**Por favor, é necessario ter instalado node v16, docker e docker-compose.**
+**Por favor, é necessário ter instalado node v16, docker e docker-compose.**
 
 ### Instruções gerais:
 
@@ -53,7 +53,7 @@ Para utilizar o app utilizando docker basta usar o seguinte comando:
 
 #### Sem docker:
 
-Para utilizar o app sem docker, é necessario ter um banco de dados rodando localmente ou em nuvem e suas informações de conexão devem ser atualizados no arquivo .env.
+Para utilizar o app sem docker, é necessário ter um banco de dados rodando localmente ou em nuvem e suas informações de conexão devem ser atualizados no arquivo .env.
 
 Com isso feito, siga os seguintes passos:
 
@@ -65,6 +65,6 @@ e use o comando
 
 para iniciar a aplicação.
 
-É possivel acessar e testar a documentação em:
+É possível acessar e testar a documentação em:
 
 [http://localhost:3002/api-docs](http://localhost:3002/api-docs)

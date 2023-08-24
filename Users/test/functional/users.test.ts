@@ -88,7 +88,7 @@ describe("Users functional tests", () => {
         .post("/auth")
         .send(invalidAuthUser);
 
-      expect(status).toBe(HttpStatus.BAD_REQUEST);
+      expect(status).toBe(HttpStatus.UNAUTHORIZED);
       expect(body.message).toMatch(
         "Could not find a User with this email and password."
       );
@@ -105,7 +105,7 @@ describe("Users functional tests", () => {
         .post("/auth")
         .send(invalidAuthUser);
 
-      expect(status).toBe(HttpStatus.BAD_REQUEST);
+      expect(status).toBe(HttpStatus.UNAUTHORIZED);
       expect(body.message).toMatch("Could not find a User with this email.");
     });
   });

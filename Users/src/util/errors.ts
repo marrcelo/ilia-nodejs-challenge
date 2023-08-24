@@ -4,6 +4,7 @@ import HttpStatus from "http-status-codes";
 import mongoose from "mongoose";
 import { JsonWebTokenError } from "jsonwebtoken";
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const sendError = async (res: Response, error: Error | any) => {
   logger.error(error);
   //   const { type, message, stack, status } = error;

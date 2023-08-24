@@ -28,10 +28,10 @@ export const createUser = async (req: Request, res: Response) => {
         .send({ message: "Validation Error: Invalid request.", error });
 
     const user = new UserModel(value);
-    const newUser = await user.save({});
-    const { password, ...userWithouPassword } = newUser.toObject();
+    const newUser = (await user.save({})).toObject();
+    delete newUser.password;
 
-    return res.status(HttpStatus.CREATED).send(userWithouPassword);
+    return res.status(HttpStatus.CREATED).send(newUser);
   } catch (error) {
     return sendError(res, error);
   }

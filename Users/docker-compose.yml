@@ -3,30 +3,24 @@ version: "3"
 services:
   database:
     container_name: users_db
-
     build:
       context: .
       dockerfile: ./docker/database/Dockerfile
     command: mongod --port 27027
-    # image: mongo
     restart: always
     ports:
       - 27027:27027
     environment:
       MONGO_INITDB_DATABASE: ${MONGO_INITDB_DATABASE}
-      # MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
-      # MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
 
   app:
     container_name: users_app
     build:
       context: .
       dockerfile: ./docker/app/Dockerfile
-    command: npm run dev 
+    command: npm run dev
     ports:
       - 3002:3002
-    volumes:
-      - .:/usr/app
     restart: always
     depends_on:
       - database

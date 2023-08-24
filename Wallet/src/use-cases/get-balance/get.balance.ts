@@ -9,7 +9,7 @@ const getBalance = async (req: Request, res: Response) => {
     const [result] = await TransactionModel.aggregate([
       {
         $match: {
-          user_id: user_id,
+          user_id,
         },
       },
       {

@@ -5,6 +5,7 @@ import logger from "@src/logger";
 import bodyParser from "body-parser";
 import express from "express";
 import swaggerUi from "swagger-ui-express";
+import pinoHttp from "pino-http";
 import swaggerDocument from "./api-docs.json";
 import authMiddleware from "./middlewares/auth";
 import { createTransaction } from "./use-cases/create-transaction/create-transaction";
@@ -15,6 +16,7 @@ export const app = express();
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(pinoHttp());
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 

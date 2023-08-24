@@ -41,23 +41,23 @@ export const authUser = async (req: Request, res: Response) => {
 
     if (!userWithEmail)
       return res
-        .status(HttpStatus.BAD_REQUEST)
+        .status(HttpStatus.UNAUTHORIZED)
         .send({ message: "Could not find a User with this email." });
 
     const isPasswordCorrect = userWithEmail.authenticate(user.password);
 
     if (!isPasswordCorrect)
-      return res.status(HttpStatus.BAD_REQUEST).send({
+      return res.status(HttpStatus.UNAUTHORIZED).send({
         message: "Could not find a User with this email and password.",
       });
 
     // eslint-disable-next-line no-underscore-dangle
     const access_token = generateToken(userWithEmail._id.toString());
 
-    const { password, ...userWithouPassword } = userWithEmail.toObject();
-    return res
-      .status(HttpStatus.OK)
-      .send({ user: userWithouPassword, access_token });
+    const validUser = userWithEmail.toObject();
+    delete validUser.password;
+
+    return res.status(HttpStatus.OK).send({ user: validUser, access_token });
   } catch (error) {
     return sendError(res, error);
   }

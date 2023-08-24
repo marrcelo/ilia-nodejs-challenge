@@ -4,25 +4,27 @@ import HttpStatus from "http-status-codes";
 import mongoose from "mongoose";
 import { JsonWebTokenError } from "jsonwebtoken";
 
-const sendError = async (res: Response, error: Error | any) => {
+const sendError = async (res: Response, error: unknown) => {
   logger.error(error);
-  //   const { type, message, stack, status } = error;
-  let { message, status } = error;
 
-  if (error instanceof mongoose.Error.ValidationError)
+  let message;
+  let status;
+
+  if (error instanceof mongoose.Error.ValidationError) {
     status = HttpStatus.BAD_REQUEST;
-
-  if (error instanceof JsonWebTokenError) {
+    message = error.message;
+  } else if (error instanceof JsonWebTokenError) {
     status = HttpStatus.UNAUTHORIZED;
+    message = error.message;
     if (error.message === "jwt malformed") {
       message = "Authorization token malformed.";
     }
+  } else if (error instanceof Error) {
+    message = error.message;
   }
 
-  return res.status(status || HttpStatus.INTERNAL_SERVER_ERROR).send({
-    message: message || "Unkown error.",
-    // details: error,
-    // details: { type, status, message, stack },
+  return res.status(status ?? HttpStatus.INTERNAL_SERVER_ERROR).send({
+    message: message ?? "Unknown error.",
   });
 };
 

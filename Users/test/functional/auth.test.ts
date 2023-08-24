@@ -30,7 +30,7 @@ describe("Auth functional tests", () => {
         .post("/auth")
         .send(userData);
 
-      expect(status).toBe(HttpStatus.BAD_REQUEST);
+      expect(status).toBe(HttpStatus.UNAUTHORIZED);
       expect(body.message).toMatch(
         "Could not find a User with this email and password."
       );
@@ -43,7 +43,7 @@ describe("Auth functional tests", () => {
         .post("/auth")
         .send(userData);
 
-      expect(status).toBe(HttpStatus.BAD_REQUEST);
+      expect(status).toBe(HttpStatus.UNAUTHORIZED);
       expect(body.message).toMatch("Could not find a User with this email.");
     });
   });

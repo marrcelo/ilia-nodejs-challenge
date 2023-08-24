@@ -2,25 +2,25 @@ version: "3"
 
 services:
   database:
-    image: mongo
     container_name: wallet_db
+    build:
+      context: .
+      dockerfile: ./docker/database/Dockerfile
+    command: mongod
     restart: always
     ports:
       - 27017:27017
     environment:
       MONGO_INITDB_DATABASE: ${MONGO_INITDB_DATABASE}
-      # MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
-      # MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
 
   app:
     container_name: wallet_app
-    build:  
+    build:
       context: .
-    command: npm run dev 
+      dockerfile: ./docker/app/Dockerfile
+    command: npm run dev
     ports:
       - 3001:3001
-    volumes:
-      - .:/usr/app
     restart: always
     depends_on:
       - database

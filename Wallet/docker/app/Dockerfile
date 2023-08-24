@@ -12,4 +12,4 @@ ENV PATH /usr/app/node_modules/.bin:$PATH
 
 COPY . /usr/app
 
-EXPOSE 3002
+EXPOSE 3001
